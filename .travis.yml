@@ -1,7 +1,7 @@
 sudo: required
 services:
   - docker
-  env:
+env:
     global:
       - SHA=$(git rev-parse HEAD)
       - CLOUDSDK_CORE_DISABLE_PROMPTS=1
@@ -15,10 +15,10 @@ before_install:
   - gcloud config set compute/zone europe-north1-a
   - gcloud container clusters get-credentials f1-k8s
   - echo "$DOCKER_PASSSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t stephengrider/react-test -f ./client/Dockerfile.dev ./client/Dockerfile.dev ./client
+  - docker build -t F1-K8s/react-test -f ./client/Dockerfile.dev ./client/Dockerfile.dev ./client
 
 script:
-  - docker run stephengrider/react-test npm test -- -- coverage
+  - docker run F1-K8s/react-test npm test -- -- coverage
 
 deploy:
   provider: script
