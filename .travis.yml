@@ -15,7 +15,7 @@ before_install:
   - gcloud config set compute/zone europe-north1-a
   - gcloud container clusters get-credentials f1-k8s
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t fatalis/react-test -f ./client/Dockerfile.dev ./client/Dockerfile.dev ./client
+  - docker build -t fatalis/react-test -f ./client/Dockerfile.dev ./client/Dockerfile.dev ./client  .
 
 script:
   - docker run f1-k8s/react-test npm test -- --coverage
